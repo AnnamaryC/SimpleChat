@@ -1,7 +1,11 @@
 package com.example.anitac.simplechat;
 
 import android.app.Application;
+
+import com.example.anitac.simplechat.models.Message;
 import com.parse.Parse;
+import com.parse.ParseObject;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -14,7 +18,11 @@ public class ChatApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        ParseObject.registerSubclass(Message.class); //register this class with parse
+
         // Use for monitoring Parse network traffic
+        // Can be Level.BASIC, Level.HEADERS, or Level.BODY
+        // See http://square.github.io/okhttp/3.x/logging-interceptor/ to see the options.
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         // Can be Level.BASIC, Level.HEADERS, or Level.BODY
